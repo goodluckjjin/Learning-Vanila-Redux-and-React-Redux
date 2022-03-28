@@ -1,20 +1,36 @@
+import {createStore} from 'redux';
+
+
+const ADD_TODO = "ADD_TODO";
+const DELETE_TODO = "DELETE_TODO";
+
+const reducer = (state = [], action) => {
+  console.log(state);
+  console.log(action);
+  switch(action.type) {
+    case ADD_TODO:
+      return []
+      case DELETE_TODO:
+        return []
+        default: 
+        return state;
+  }
+};
+
+const store = createStore(reducer);
+
 const form = document.querySelector("form");
 const input = document.querySelector("input");
 const ul = document.querySelector("ul");
-
-const createToDo = todo => {
-  const li = document.createElement("li");
-  ul.appendChild(li);
-};
 
 const onSubmit = e => {
   e.preventDefault();
   const toDo = input.value;
   input.value = "";
-  createToDo(toDo);
+  store.dispatch({type : ADD_TODO, text: toDo});
 };
 
-form.addEventListener("submit". onSubmit);
+form.addEventListener("submit", onSubmit);
 
 // dispatch : reducer를 불러서 action 행사 = store와 커뮤니케이션
 // action : reducer와 커뮤니케이션
