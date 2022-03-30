@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {connect, useDispatch} from 'react-redux';
+import {connect} from 'react-redux';
 import {actionCreators} from '../store';
 import ToDo from '../components/ToDo';
 
@@ -36,7 +36,7 @@ function Home ({toDos, addToDo}) {
 
 // redux state로부터 home(component)에 prop으로써 전달
 function mapStateToProps(state) {
-    console.log("mapStateToProps is worked")
+    console.log("mapStateToProps is worked", state)
 
     return {toDos: state};
 }
