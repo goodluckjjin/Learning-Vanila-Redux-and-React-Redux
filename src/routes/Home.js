@@ -1,16 +1,24 @@
 import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import {connect, useDispatch} from 'react-redux';
+import {actionCreators} from '../store';
 
-function Home ({toDos}) {
+// Home은 dispatch, action creators를 직접 처리할 필요가 없음
+// mapStateToProps와 mapDispatchToProps 두개의 함수로 나누어 이용하면 됨
 
+
+
+function Home ({toDos, addToDo}) {
     const [text, setText] = useState("");
     const onChange = e => {
         setText(e.target.value);
     }
     const onSubmit = e => {
         e.preventDefault();
+        addToDo(text);
         setText("");
     }
+    const dispatch = useDispatch()
+    console.log("디스패치 ", dispatch);
 
     return (
         <>
@@ -31,4 +39,11 @@ function mapStateToProps(state) {
     return {toDos: state};
 }
 
-export default connect(mapStateToProps)(Home);
+function mapDispatchToProps(dispatch) {
+    return {
+        addToDo : (text) => dispatch(actionCreators.addToDo(text))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
