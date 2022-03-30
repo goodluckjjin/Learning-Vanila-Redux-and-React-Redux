@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import {connect, useDispatch} from 'react-redux';
 import {actionCreators} from '../store';
+import ToDo from '../components/ToDo';
 
 // Home은 dispatch, action creators를 직접 처리할 필요가 없음
 // mapStateToProps와 mapDispatchToProps 두개의 함수로 나누어 이용하면 됨
-
-
 
 function Home ({toDos, addToDo}) {
     const [text, setText] = useState("");
@@ -13,12 +12,13 @@ function Home ({toDos, addToDo}) {
         setText(e.target.value);
     }
     const onSubmit = e => {
+        console.log("onSubmit working")
         e.preventDefault();
         addToDo(text);
         setText("");
+        console.log("onSubmit has worked")
+
     }
-    const dispatch = useDispatch()
-    console.log("디스패치 ", dispatch);
 
     return (
         <>
@@ -28,7 +28,7 @@ function Home ({toDos, addToDo}) {
                 <button>Add</button>
             </form>
             <ul>
-                {JSON.stringify(toDos)}
+               {toDos.map(toDo => <ToDo {...toDo} key={toDo.id}/>)}
             </ul>
         </>
     )
@@ -36,10 +36,13 @@ function Home ({toDos, addToDo}) {
 
 // redux state로부터 home(component)에 prop으로써 전달
 function mapStateToProps(state) {
+    console.log("mapStateToProps is worked")
+
     return {toDos: state};
 }
 
 function mapDispatchToProps(dispatch) {
+    console.log("mapDispatchToProps is worked")
     return {
         addToDo : (text) => dispatch(actionCreators.addToDo(text))
     }
