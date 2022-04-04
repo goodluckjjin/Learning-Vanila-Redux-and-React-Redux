@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {actionCreators} from '../store';
+// import {actionCreators} from '../store';
+import {add} from '../store';
 import ToDo from '../components/ToDo';
 
 // Home은 dispatch, action creators를 직접 처리할 필요가 없음
@@ -44,7 +45,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     console.log("mapDispatchToProps is worked")
     return {
-        addToDo : (text) => dispatch(actionCreators.addToDo(text))
+        // addToDo : (text) => dispatch(actionCreators.addToDo(text))
+        addToDo : (text) => dispatch(add(text))
+        
     }
 }
 
