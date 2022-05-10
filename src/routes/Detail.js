@@ -10,11 +10,19 @@ import {connect} from 'react-redux';
 function Detail({toDos}) {
   const {id} = useParams();
   const toDo = toDos.find(toDo => toDo.id === parseInt(id));
-  
+  const date = new Date(toDo?.id);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const hour = date.getHours();
+  const minute = date.getUTCMinutes();
+  console.log(month);
+  console.log("date 는 ", toDo?.id);
+  console.log("date 는 ", date);
   return (
-    <div>
+    <div style={{margin: 8}}>
       <h1>{toDo?.text}</h1>
-      <h5>Created at : {toDo?.id}</h5>
+      <h5>생성된 날짜 : {year}년 {month}월 {day}일 {hour}시 {minute<10? "0"+minute: minute}분</h5>
     </div>
   )
 }
