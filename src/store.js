@@ -1,10 +1,14 @@
-import {createStore} from 'redux';
-import {configureStore, createAction, createReducer, createSlice} from '@reduxjs/toolkit';
+import { createStore } from "redux";
+import {
+  configureStore,
+  createAction,
+  createReducer,
+  createSlice,
+} from "@reduxjs/toolkit";
 
 // 1. action 정의 및 생성
 // const ADD = "ADD";
 // const DELETE = "DELETE";
-
 
 // const addToDo = (text) => {
 //   return {
@@ -15,14 +19,14 @@ import {configureStore, createAction, createReducer, createSlice} from '@reduxjs
 
 // const deleteToDo = (id) => {
 //   return {
-//     type: DELETE, 
+//     type: DELETE,
 //     id: parseInt(id)
 //   }
 // }
 
-// 2. redux-toolkit을 이용한 action 생성 
-const addToDo = createAction('ADD');
-const deleteToDo = createAction('DELETE');
+// 2. redux-toolkit을 이용한 action 생성
+const addToDo = createAction("ADD");
+const deleteToDo = createAction("DELETE");
 
 // 1. 실행시 state를 새로 생성
 /* const reducer = (state=[], action) => {
@@ -49,17 +53,22 @@ const deleteToDo = createAction('DELETE');
 });  */
 
 const toDos = createSlice({
-  name: 'toDoReducer',
+  name: "toDoReducer",
   initialState: [],
   reducers: {
-    add: (state,action) => {
-      state.push({text: action.payload, id: Date.now()})
+    add: (state, action) => {
+      state.push({ text: action.payload, id: Date.now(), checked: false });
     },
-    remove: (state,action) =>
-    state.filter(toDo => toDo.id !== action.payload)
-  }
-})
-
+    remove: (state, action) =>
+      state.filter((toDo) => toDo.id !== action.payload),
+    check: (state, action) => {
+      state.map((toDo) => {
+        if (toDo.id === action.payload.id) toDo.checked = !toDo.checked;
+        return toDo;
+      });
+    },
+  },
+});
 
 // const store = createStore(reducer);
 // const store = configureStore({reducer});
@@ -74,10 +83,10 @@ console.log("toDos", toDos);
 //   deleteToDo
 // }
 
-export const {add, remove} = toDos.actions;
+export const { add, remove, check } = toDos.actions;
 
 /* 코드줄 줄이기 전
 export default store; */
 
 /* 코드줄 줄이기 후 */
-export default configureStore({reducer: toDos.reducer});
+export default configureStore({ reducer: toDos.reducer });
