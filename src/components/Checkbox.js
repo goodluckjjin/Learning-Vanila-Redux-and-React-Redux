@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Input = styled.input`
@@ -43,6 +43,8 @@ const Label = styled.label`
 `;
 
 function Checkbox({ value, onChange }) {
+  console.log("vale", value);
+
   return (
     <div>
       <Input type="checkbox" id="cb1" value={value} onChange={onChange} />

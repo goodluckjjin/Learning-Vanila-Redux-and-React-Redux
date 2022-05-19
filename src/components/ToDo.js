@@ -61,14 +61,14 @@ const CheckboxWrap = styled.div`
   margin: 0 8px;
 `;
 
-function ToDo({ text, onBtnClick, id, index }) {
-  console.log("   ", onBtnClick);
+function ToDo({ text, onBtnClick, id, checked }) {
+  console.log("toDo = > ", text, ":", checked);
   return (
     <Item>
       <Content>
         {/* <Number>{index}</Number> */}
         <CheckboxWrap>
-          <Checkbox onChange={onBtnClick?.onCheckBtnClick} />
+          <Checkbox value={checked} onChange={onBtnClick?.onCheckBtnClick} />
         </CheckboxWrap>
         <Link
           to={`/${id}`}

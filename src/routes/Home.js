@@ -9,21 +9,26 @@ import styled from "styled-components";
 // mapStateToProps와 mapDispatchToProps 두개의 함수로 나누어 이용하면 됨
 
 const HomeWrapper = styled.div`
-  padding: 0 8px;
+  padding: 0 48px;
 `;
 
 const MainTitle = styled.h1`
   color: #e84393;
+  text-align: center;
+  font-size: bold;
 `;
 
 const Form = styled.form`
   display: flex;
-  margin: 8px 0;
+  align-items: center;
+  margin: 8px 0 60px;
 `;
 
 const Input = styled.input`
+  flex: 1;
+  height: 52px;
   margin-right: 4px;
-  padding: 8px;
+  padding: 0 8px;
   background-color: #fff;
   border: 2px solid #e84393;
   border-radius: 8px;
@@ -33,8 +38,8 @@ const AddButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
+  width: 52px;
+  height: 52px;
   border: none;
   border-radius: 12px;
   background-color: #e84393;
@@ -88,13 +93,13 @@ function Home({ toDos, addToDo }) {
 
 // redux state로부터 home(component)에 prop으로써 전달
 function mapStateToProps(state) {
-  console.log("mapStateToProps is worked", state);
+  console.log("(Home) mapStateToProps is worked", state);
 
   return { toDos: state };
 }
 
 function mapDispatchToProps(dispatch) {
-  console.log("mapDispatchToProps is worked");
+  console.log("(Home) mapDispatchToProps is worked");
   return {
     // addToDo : (text) => dispatch(actionCreators.addToDo(text))
     addToDo: (text) => dispatch(add(text)),

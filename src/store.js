@@ -59,13 +59,16 @@ const toDos = createSlice({
     add: (state, action) => {
       state.push({ text: action.payload, id: Date.now(), checked: false });
     },
-    remove: (state, action) =>
-      state.filter((toDo) => toDo.id !== action.payload),
+    remove: (state, action) => {
+      console.log("action", action);
+      return state.filter((toDo) => toDo.id !== action.payload);
+    },
     check: (state, action) => {
-      state.map((toDo) => {
+      const newState = state.map((toDo) => {
         if (toDo.id === action.payload.id) toDo.checked = !toDo.checked;
         return toDo;
       });
+      return newState;
     },
   },
 });
@@ -76,7 +79,7 @@ const toDos = createSlice({
 /* 코드줄 줄이기 전
 const store = configureStore({reducer: toDos.reducer}); */
 
-console.log("toDos", toDos);
+console.log("toDos in store", toDos);
 
 // export const actionCreators = {
 //   addToDoć
